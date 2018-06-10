@@ -61,5 +61,9 @@
   <ItemGroup>
     <Build Include="CreateTable.sql" />
     <Build Include="AlterTable.sql" />
+    <Build Include="AVG.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AVGTemplate.sql" />
   </ItemGroup>
 </Project>
