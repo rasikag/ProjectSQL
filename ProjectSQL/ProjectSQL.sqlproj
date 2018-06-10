@@ -65,5 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="AVGTemplate.sql" />
+    <None Include="GetColumnType.sql" />
   </ItemGroup>
 </Project>
