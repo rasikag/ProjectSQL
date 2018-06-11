@@ -66,5 +66,6 @@
   <ItemGroup>
     <None Include="AVGTemplate.sql" />
     <None Include="GetColumnType.sql" />
+    <None Include="CHECKSUM_AGG_Temp.sql" />
   </ItemGroup>
 </Project>

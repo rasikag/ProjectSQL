@@ -1,19 +1,19 @@
-GO;
+
 SELECT AVG(VacationHours)AS 'Average vacation hours',   
     SUM(SickLeaveHours) AS 'Total sick leave hours'  
 FROM HumanResources.Employee  
 WHERE JobTitle LIKE 'Vice President%';  
-GO;
+
 
 -- The following example produces summary values for each sales 
 -- territory in the AdventureWorks2012 database. The summary lists 
 -- the average bonus received by the sales people in each territory, 
 -- and the sum of year-to-date sales for each territory.
 
-GO
+
 SELECT * FROM Sales.SalesPerson;
 
-GO
+
 SELECT TerritoryID, 
 	AVG(Bonus) as 'AVG Bonus', 
 	SUM(SalesYTD) AS 'Sum of SalesYTD' 
@@ -41,6 +41,7 @@ SELECT CONVERT(varchar(20),
 
 -- full query with OVER function 
 -- break this to part by part
+
 SELECT BusinessEntityID, TerritoryID   
    ,DATEPART(yy,ModifiedDate) AS SalesYear  
    ,CONVERT(varchar(20),SalesYTD,1) AS  SalesYTD  
@@ -53,6 +54,20 @@ SELECT BusinessEntityID, TerritoryID
 FROM Sales.SalesPerson  
 WHERE TerritoryID IS NULL OR TerritoryID < 5  
 ORDER BY TerritoryID,SalesYear; 
+
+
+-- full query without OVER function 
+-- break this to part by part 
+SELECT BusinessEntityID, TerritoryID   
+   ,DATEPART(yy,ModifiedDate) AS SalesYear  
+   ,CONVERT(varchar(20),SalesYTD,1) AS  SalesYTD  
+   ,CONVERT(varchar(20),AVG(SalesYTD) OVER (ORDER BY DATEPART(yy,ModifiedDate)   
+                                            ),1) AS MovingAvg  
+   ,CONVERT(varchar(20),SUM(SalesYTD) OVER (ORDER BY DATEPART(yy,ModifiedDate)   
+                                            ),1) AS CumulativeTotal  
+FROM Sales.SalesPerson  
+WHERE TerritoryID IS NULL OR TerritoryID < 5  
+ORDER BY SalesYear;
 
 
 
